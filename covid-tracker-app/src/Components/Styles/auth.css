@@ -14,42 +14,18 @@
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-#navbar-hadding {
-  font-size: xx-large;
-  font-weight: bolder;
-  margin: 14px;
-  box-sizing: border-box;
-  color: transparent;
-  position: relative;
-  letter-spacing: 10px;
-  -webkit-text-stroke: 0px #292828;
+#navbar-logo-div {
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  justify-content: space-between;
 }
 
-#navbar-hadding::before {
-  content: attr(data-text);
-  position: absolute;
-  height: 100%;
-  width: 0;
-  top: 0;
-  left: 0;
-  color: #e1e1e1;
-  -webkit-text-stoke: 0px #292828;
-  border-right: 2px solid #e1e1e1;
-  overflow: hidden;
-  animation: animate 6s linear infinite;
-}
-
-@keyframes animate {
-  0%,
-  10%,
-  100% {
-    width: 0;
-  }
-
-  70%,
-  90% {
-    width: 100%;
-  }
+#navbar-logo-text {
+  font-size: large;
+  font-weight: bold;
+  color: #ef233c;
+  margin-left: 5px;
 }
 
 #home-navbar-log-in {

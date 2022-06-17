@@ -28,7 +28,18 @@ ChartJS.register(
   Legend,
 );
 
+import {
+  searchFailure,
+  searchLoading,
+  searchSuccess,
+} from "../Redux/covidTrackerRedux/covidTrackerActions";
+import { useDispatch, useSelector } from "react-redux";
+
 export const HomePage = () => {
+  const dispatch = useDispatch();
+
+  const { countrySearch } = useSelector((state) => state.event);
+
   const [worldData, setworldData] = useState({});
   const [contientData, setcontientData] = useState([]);
   const [countriesData, setcountriesData] = useState([]);
@@ -49,7 +60,11 @@ export const HomePage = () => {
       });
   }, []);
 
-  const [searched, setsearched] = useState("india");
+  const [searched, setsearched] = useState(countrySearch);
+
+  useEffect(() => {
+    setsearched(() => countrySearch);
+  }, [countrySearch]);
 
   const [searchedcountryData, setsearchedcountryData] = useState([]);
 
@@ -59,7 +74,14 @@ export const HomePage = () => {
         `https://corona.lmao.ninja/v2/countries/${searched}?yesterday=true&strict=true&query`,
       )
       .then((res) => {
+        if (res.data.message) {
+          dispatch(searchSuccess("india"));
+        }
+
         setsearchedcountryData(() => res.data);
+      })
+      .catch((error) => {
+        dispatch(searchSuccess("india"));
       });
   }, [searched]);
 
@@ -100,6 +122,11 @@ export const HomePage = () => {
         `https://api.covid19api.com/country/${searched}/status/confirmed?from=${startDate}&to=${endDate}`,
       )
       .then((res) => {
+        if (res.data.message) {
+          alert("ERROR! search a country");
+          dispatch(searchSuccess("india"));
+        }
+
         let cases = [];
         let date = [];
 
@@ -112,6 +139,10 @@ export const HomePage = () => {
 
         setchartcases(() => cases);
         setchartdate(() => date);
+      })
+      .catch((error) => {
+        alert("ERROR! search a country");
+        dispatch(searchSuccess("india"));
       });
   }, [searched, startDate, endDate]);
 

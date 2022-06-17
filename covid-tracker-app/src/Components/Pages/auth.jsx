@@ -13,6 +13,7 @@ import {
   signUpSuccess,
 } from "../Redux/authRedux/atuhAction";
 import axios from "axios";
+import CoronavirusIcon from "@mui/icons-material/Coronavirus";
 
 export const LoginSignup = () => {
   document.body.style.background = "none";
@@ -37,7 +38,6 @@ export const LoginSignup = () => {
     username: "",
     password: "",
     email: "",
-    mobile: "",
     name: "",
   };
 
@@ -60,7 +60,7 @@ export const LoginSignup = () => {
   }
 
   useEffect(() => {
-    let user = cookies.user;
+    let user = cookies.covidUserId;
 
     if (user) {
       dispatch(logInSuccess(user));
@@ -82,7 +82,7 @@ export const LoginSignup = () => {
           } else {
             dispatch(logInSuccess(token));
             if (remember) {
-              setCookie("user", token, { path: "/" });
+              setCookie("covidUserId", token, { path: "/" });
             }
             console.log("==> logged in");
             setTimeout(() => {
@@ -129,9 +129,12 @@ export const LoginSignup = () => {
   return (
     <div>
       <div id="home-navbar-main">
-        <h2 data-text="ToDo..." id="navbar-hadding">
-          ToDo...
-        </h2>
+        <div id="navbar-logo-div">
+          <CoronavirusIcon className="navbar-logo-icon"></CoronavirusIcon>
+          <h2 data-text="COVID TRACKER" id="navbar-logo-text">
+            COVID TRACKER
+          </h2>
+        </div>
         <Button
           variant="outlined"
           id="home-navbar-log-in"
@@ -234,17 +237,6 @@ export const LoginSignup = () => {
                   type="email"
                   name="email"
                   placeholder="ENTER EMAIL HERE..."
-                  className="signin-input"
-                  defaultValue=""
-                  onChange={(event) => handleSignupChanges(event)}
-                />
-                <br />
-                <label className="signin-label">MOBILE</label>
-                <br />
-                <input
-                  type="number"
-                  name="mobile"
-                  placeholder="ENTER MOBILE HERE..."
                   className="signin-input"
                   defaultValue=""
                   onChange={(event) => handleSignupChanges(event)}
