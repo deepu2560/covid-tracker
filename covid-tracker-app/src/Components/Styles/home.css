@@ -1,0 +1,118 @@
+#display-main-div {
+  width: 100%;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.7);
+  margin-top: 5px;
+}
+
+#world-covid-data-div {
+  width: 35%;
+  height: 650px;
+  overflow-y: scroll;
+}
+
+#world-wide-active-critical-div,
+#country-active-critical-div {
+  width: 80%;
+  margin: auto;
+  background-color: #8bbae9;
+  color: #ffffff;
+  border-radius: 20px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+#world-wide-active-critical-div > div > h2,
+#country-active-critical-div > div > h2 {
+  text-decoration: underline dashed;
+  margin-bottom: 0px;
+  color: #171120;
+}
+
+#world-wide-total-report-div,
+#country-total-today-cases-div > div > div {
+  background-color: #ff83cd;
+  width: 80%;
+  margin: auto;
+  border-radius: 20px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+#world-wide-total-report-div > div > h2,
+#country-total-today-cases-div > div > div > div > h2 {
+  margin-bottom: 0px;
+  text-decoration: underline dashed;
+  color: #171120;
+}
+
+.continent-countries-table-div {
+  width: 95%;
+  height: 300px;
+  margin: auto;
+  margin-top: 10px;
+  background-color: #797878;
+  overflow-y: scroll;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.contient-countries-table {
+  width: 98%;
+  margin: auto;
+}
+
+th,
+td {
+  border: 1px solid black;
+  padding: 5px 10px;
+}
+
+#searched-country-data-div {
+  border: 1px solid red;
+  width: 65%;
+  height: 650px;
+}
+
+#country-flag-name-detail-div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 20px;
+}
+
+#country-flag-name-detail-div > div:nth-child(1) > h1 {
+  color: white;
+  margin: 0px;
+  font-size: 500%;
+}
+
+#country-total-today-cases-div {
+  display: flex;
+  padding: 5px 20px;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  margin: auto;
+}
+
+#country-total-today-cases-div > div {
+  width: 47%;
+}
+
+#country-total-today-cases-div > div > div {
+  width: auto;
+}
+
+.line-between-div {
+  background-color: #171120;
+  width: 2px;
+  height: 50px;
+  border-radius: 1px;
+}

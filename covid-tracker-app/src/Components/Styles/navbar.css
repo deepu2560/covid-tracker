@@ -1,0 +1,65 @@
+#navbar-main-div {
+  margin: 0px;
+  background-color: #1e2029;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#navbar-logo-div {
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  justify-content: space-between;
+}
+
+#navbar-logo-text {
+  font-size: large;
+  font-weight: bold;
+  color: #ef233c;
+  margin-left: 5px;
+}
+
+#navbar-search-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#navbar-search-div > input {
+  font-size: larger;
+  font-weight: bold;
+  padding: 5px 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 2px solid blue;
+  border-right: 0px;
+  border-radius: 10px 0px 0px 10px;
+}
+
+#navbar-search-div > button {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 2px solid blue;
+  border-left: 0px;
+  cursor: pointer;
+  border-radius: 0px 10px 10px 0px;
+}
+
+#navbar-search-div > button:hover {
+  background-color: #ffffff;
+}
+
+#navbar-auth-side-div {
+  display: flex;
+  gap: 10px;
+}
+
+#navbar-auth-side-div > button {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid #ef233c;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
