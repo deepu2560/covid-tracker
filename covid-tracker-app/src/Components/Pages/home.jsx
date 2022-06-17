@@ -1,9 +1,32 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  ArcElement,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Pie, Line } from "react-chartjs-2";
 
 import "../Styles/home.css";
 
 import { Navbar } from "./navbar";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend,
+);
 
 export const HomePage = () => {
   const [worldData, setworldData] = useState({});
@@ -39,6 +62,76 @@ export const HomePage = () => {
         setsearchedcountryData(() => res.data);
       });
   }, [searched]);
+
+  const piedata = {
+    labels: ["deaths", "recovered", "cases"],
+    datasets: [
+      {
+        label: "# of Votes",
+        data: [
+          searchedcountryData.deathsPerOneMillion,
+          searchedcountryData.recoveredPerOneMillion,
+          searchedcountryData.casesPerOneMillion,
+        ],
+        backgroundColor: ["red", "green", "yellow"],
+        borderColor: ["red", "green", "yellow"],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const [startDate, setstartDate] = useState("2022-01-01T00:00:00Z");
+  const [endDate, setendDate] = useState("2022-06-16T00:00:00Z");
+
+  const handleChangeDate = (prop, value) => {
+    if (prop == "start") {
+      setstartDate(() => value + "T00:00:00Z");
+    } else {
+      setendDate(() => value + "T00:00:00Z");
+    }
+  };
+
+  const [chartcases, setchartcases] = useState([]);
+  const [chartdate, setchartdate] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://api.covid19api.com/country/${searched}/status/confirmed?from=${startDate}&to=${endDate}`,
+      )
+      .then((res) => {
+        let cases = [];
+        let date = [];
+
+        res.data.map(({ Cases, Date }, index) => {
+          if (index % 2 == 0) {
+            cases.push(Cases);
+            date.push(Date.split("T")[0]);
+          }
+        });
+
+        setchartcases(() => cases);
+        setchartdate(() => date);
+      });
+  }, [searched, startDate, endDate]);
+
+  const data = {
+    labels: chartdate,
+    datasets: [
+      {
+        label: "cases",
+        data: chartcases,
+        backgroundColor: "yellow",
+        borderColor: "green",
+        tension: 0.4,
+        fill: true,
+        pointStyle: "rect",
+        pointBorderColor: "blue",
+        pointBackgroundColor: "#fff",
+        showLine: true,
+      },
+    ],
+  };
 
   return (
     <div>
@@ -215,10 +308,41 @@ export const HomePage = () => {
             </div>
           </div>
           <div id="pie-chart-status">
-            <div></div>
-            <div></div>
+            <h2>Report per million</h2>
+            <div className="chart-pie-div">
+              <Pie
+                data={piedata}
+                width={100}
+                height={100}
+                style={{ width: "100px", height: "100px" }}
+              />
+            </div>
           </div>
-          <div id="graph-representation"></div>
+          <div id="graph-representation">
+            <h2>
+              Graphical representation (from {startDate.split("T")[0]} to{" "}
+              {endDate.split("T")[0]})
+            </h2>
+            <div id="select-date-div">
+              <input
+                type="date"
+                onChange={(event) =>
+                  handleChangeDate("start", event.target.value)
+                }
+                className="select-date-input"
+              />
+              <input
+                type="date"
+                onChange={(event) =>
+                  handleChangeDate("end", event.target.value)
+                }
+                className="select-date-input"
+              />
+            </div>
+            <div className="chart-pie-div">
+              <Line data={data}>Hello</Line>
+            </div>
+          </div>
         </div>
       </div>
     </div>

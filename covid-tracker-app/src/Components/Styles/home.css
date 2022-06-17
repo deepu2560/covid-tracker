@@ -2,7 +2,7 @@
   width: 100%;
   display: flex;
   background-color: rgba(0, 0, 0, 0.7);
-  margin-top: 5px;
+  margin-top: 0px;
 }
 
 #world-covid-data-div {
@@ -75,9 +75,9 @@ td {
 }
 
 #searched-country-data-div {
-  border: 1px solid red;
   width: 65%;
   height: 650px;
+  overflow-y: scroll;
 }
 
 #country-flag-name-detail-div {
@@ -85,6 +85,9 @@ td {
   align-items: center;
   justify-content: space-between;
   padding: 5px 20px;
+  position: sticky;
+  top: 0;
+  background-color: rgba(23, 17, 32, 0.5);
 }
 
 #country-flag-name-detail-div > div:nth-child(1) > h1 {
@@ -115,4 +118,25 @@ td {
   width: 2px;
   height: 50px;
   border-radius: 1px;
+}
+
+.chart-pie-div {
+  width: 80%;
+  margin: auto;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+#select-date-div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 40%;
+  padding: 5px 10px;
+  margin: auto;
+}
+
+.select-date-input {
+  font-size: x-large;
 }

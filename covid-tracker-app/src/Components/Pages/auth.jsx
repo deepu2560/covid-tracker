@@ -64,7 +64,7 @@ export const LoginSignup = () => {
 
     if (user) {
       dispatch(logInSuccess(user));
-      navigate("/events");
+      navigate("/");
     }
   }, []);
 
@@ -86,7 +86,7 @@ export const LoginSignup = () => {
             }
             console.log("==> logged in");
             setTimeout(() => {
-              navigate("/events");
+              navigate("/");
               console.clear();
             }, 100);
           }
