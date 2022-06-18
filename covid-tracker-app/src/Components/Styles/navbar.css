@@ -1,3 +1,4 @@
+/* Navbar main div */
 #navbar-main-div {
   margin: 0px;
   background-color: #1e2029;
@@ -8,6 +9,7 @@
   justify-content: space-between;
 }
 
+/* Navbar left side logo div */
 #navbar-logo-div {
   display: flex;
   align-items: center;
@@ -15,6 +17,7 @@
   justify-content: space-between;
 }
 
+/* Navbar logo text (Covid Tracker) */
 #navbar-logo-text {
   font-size: large;
   font-weight: bold;
@@ -22,12 +25,14 @@
   margin-left: 5px;
 }
 
+/* Navbaar search input box div */
 #navbar-search-div {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+/* Navbar search box */
 #navbar-search-div > input {
   font-size: larger;
   font-weight: bold;
@@ -38,6 +43,7 @@
   border-radius: 10px 0px 0px 10px;
 }
 
+/* Navbar search button */
 #navbar-search-div > button {
   background-color: rgba(255, 255, 255, 0.5);
   border: 2px solid blue;
@@ -50,6 +56,7 @@
   background-color: #ffffff;
 }
 
+/* Navbar right side signin signup button */
 #navbar-auth-side-div {
   display: flex;
   gap: 10px;
@@ -64,7 +71,7 @@
   border-radius: 10px;
   cursor: pointer;
 }
-
+/* Styles for mobiles and mobile equivalent screens */
 @media only screen and (min-width: 0px) and (max-width: 415px) {
   #navbar-main-div {
     padding-left: 4px;

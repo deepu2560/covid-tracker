@@ -1,9 +1,13 @@
+/* Main display div contain world wide data div and country div */
+
 #display-main-div {
   width: 100%;
   display: flex;
   background-color: rgba(0, 0, 0, 0.7);
   margin-top: 0px;
 }
+
+/* World wide data div */
 
 #world-covid-data-div {
   width: 35%;
@@ -52,6 +56,7 @@
   color: #171120;
 }
 
+/* Continents and countries table div */
 .continent-countries-table-div {
   width: 95%;
   height: 300px;
@@ -74,12 +79,15 @@ td {
   padding: 5px 10px;
 }
 
+/* Searched country div */
+
 #searched-country-data-div {
   width: 65%;
   height: 650px;
   overflow-y: scroll;
 }
 
+/* Top country details div (It contains country name, population and continent) */
 #country-flag-name-detail-div {
   display: flex;
   align-items: center;
@@ -95,6 +103,8 @@ td {
   margin: 0px;
   font-size: 500%;
 }
+
+/* Country total cases div */
 
 #country-total-today-cases-div {
   display: flex;
@@ -113,12 +123,16 @@ td {
   width: auto;
 }
 
+/* div of black vertical line in pink and light blue box */
+
 .line-between-div {
   background-color: #171120;
   width: 2px;
   height: 50px;
   border-radius: 1px;
 }
+
+/* Pie chart div */
 
 .chart-pie-div {
   width: 80%;
@@ -127,6 +141,8 @@ td {
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
+
+/* Graph date div from data and to date */
 
 #select-date-div {
   display: flex;
@@ -140,6 +156,8 @@ td {
 .select-date-input {
   font-size: x-large;
 }
+
+/* Styles for tablet or tablet equivalent sreens */
 
 @media only screen and (min-width: 0px) and (max-width: 415px) {
   #display-main-div {
@@ -155,6 +173,8 @@ td {
     width: 100%;
   }
 }
+
+/* Styles for mobiles and mobile equivalent screens */
 
 @media only screen and (min-width: 416px) and (max-width: 820px) {
   #display-main-div {

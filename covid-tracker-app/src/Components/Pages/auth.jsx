@@ -1,6 +1,6 @@
+// importing all rquired tools
 import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
-import "../Styles/auth.css";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,7 +15,12 @@ import {
 import axios from "axios";
 import CoronavirusIcon from "@mui/icons-material/Coronavirus";
 
+// importing auth stylesheet
+import "../Styles/auth.css";
+
+// Main LoginSignup function and exporting it
 export const LoginSignup = () => {
+  // changing body background image for auth page
   document.body.style.background = "none";
   document.body.style.background =
     "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1477346611705-65d1883cee1e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80')";
@@ -23,17 +28,22 @@ export const LoginSignup = () => {
   document.body.style.backgroundRepeat = "no-repeat";
   document.body.style.backgroundPosition = "center";
 
+  // states for props login, remember and cookies
   const [login, setlogin] = useState(true);
   const [remember, setremember] = useState(false);
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+
+  // navigate and dispatch funciton
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  // initial signin object
   const sampleSignin = {
     username: "",
     password: "",
   };
 
+  // initial signup object
   const sampleSignup = {
     username: "",
     password: "",
@@ -41,24 +51,28 @@ export const LoginSignup = () => {
     name: "",
   };
 
+  // accessing isAuth from redux
   const { isAuth } = useSelector((state) => state.auth);
 
+  // main signindata and signup data
   const [signinData, setsigninData] = useState(sampleSignin);
-
   const [signupData, setsignupData] = useState(sampleSignup);
 
+  // handleSigninChanges function handle changes in signin data object
   function handleSigninChanges({ target }) {
     const { name, value } = target;
 
     setsigninData((prev) => ({ ...prev, [name]: value }));
   }
 
+  // handleSigninChanges function handle changes in signup data object
   function handleSignupChanges({ target }) {
     const { name, value } = target;
 
     setsignupData((prev) => ({ ...prev, [name]: value }));
   }
 
+  // this for checking token in cookies
   useEffect(() => {
     let user = cookies.covidUserId;
 
@@ -68,6 +82,7 @@ export const LoginSignup = () => {
     }
   }, []);
 
+  // posting signinData to get token of user
   function signinSubmit() {
     dispatch(logInLoading());
     console.log("==> logging in");
@@ -98,6 +113,7 @@ export const LoginSignup = () => {
     }, 2000);
   }
 
+  // posting signupData to get token of user
   function signupSubmit() {
     dispatch(signUpLoading());
     setTimeout(() => {
@@ -126,8 +142,12 @@ export const LoginSignup = () => {
     }, 2000);
   }
 
+  console.clear();
+
+  // returning main display div
   return (
     <div>
+      {/* Navbar */}
       <div id="home-navbar-main">
         <div id="navbar-logo-div">
           <CoronavirusIcon className="navbar-logo-icon"></CoronavirusIcon>
@@ -143,8 +163,10 @@ export const LoginSignup = () => {
           HOME
         </Button>
       </div>
+      {/* Login signup div */}
       <div id="login-signup-component">
         <div id="login-signup-main">
+          {/* main signin and signup buttons */}
           <div id="login-signup-heading">
             <p
               style={{ borderTopLeftRadius: "10px" }}
@@ -159,7 +181,9 @@ export const LoginSignup = () => {
               Sign Up
             </p>
           </div>
+          {/* Main signin and signup form */}
           {login === true ? (
+            // Sign in form
             <div id="login-main">
               <h1>SIGN IN HERE</h1>
               <form style={{ marginBottom: "5px" }}>
@@ -206,6 +230,7 @@ export const LoginSignup = () => {
               </button>
             </div>
           ) : (
+            // sign up form
             <div id="signup-main">
               <h1>SIGN UP HERE</h1>
               <form style={{ marginBottom: "5px" }}>

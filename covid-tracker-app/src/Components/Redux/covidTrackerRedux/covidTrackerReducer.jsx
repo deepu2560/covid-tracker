@@ -1,15 +1,18 @@
+// importing action for searched country name
 import {
   SEARCH_FAILURE,
   SEARCH_LOADING,
   SEARCH_SUCCESS,
 } from "./covidTrackerActions";
 
+// initial store
 const initialStore = {
   isLoading: false,
   countrySearch: "india",
   isFailure: false,
 };
 
+// CovidTrackerReducer function and exporting function
 export const CovidTrackerReducer = (
   state = initialStore,
   { type, payload },

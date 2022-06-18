@@ -1,5 +1,7 @@
+// importing required tools
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -13,10 +15,13 @@ import {
 } from "chart.js";
 import { Pie, Line } from "react-chartjs-2";
 
+// importing stylesheet
 import "../Styles/home.css";
 
+// importing navbar
 import { Navbar } from "./navbar";
 
+// registering requirements of piechart and graph
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -28,14 +33,16 @@ ChartJS.register(
   Legend,
 );
 
+// importing action function of covid tracker
 import {
   searchFailure,
   searchLoading,
   searchSuccess,
 } from "../Redux/covidTrackerRedux/covidTrackerActions";
-import { useDispatch, useSelector } from "react-redux";
 
+// Main HomePage function and exporting it
 export const HomePage = () => {
+  // changing background image of body
   document.body.style.background = "none";
   document.body.style.background =
     "url('https://images.unsplash.com/photo-1583423230902-b653abc541eb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80')";
@@ -43,14 +50,18 @@ export const HomePage = () => {
   document.body.style.backgroundRepeat = "no-repeat";
   document.body.style.backgroundPosition = "center";
 
+  // dispatch function
   const dispatch = useDispatch();
 
+  // getting country name from redux
   const { countrySearch } = useSelector((state) => state.event);
 
+  // props for world data, continent data, countries data
   const [worldData, setworldData] = useState({});
   const [contientData, setcontientData] = useState([]);
   const [countriesData, setcountriesData] = useState([]);
 
+  // getting world, continent, and countries covid report data
   useEffect(() => {
     axios.get("https://corona.lmao.ninja/v2/all?today").then((res) => {
       setworldData(() => res.data);
@@ -67,14 +78,18 @@ export const HomePage = () => {
       });
   }, []);
 
+  // searched country prop
   const [searched, setsearched] = useState(countrySearch);
 
+  // changing searched prop according redux countrysearch
   useEffect(() => {
     setsearched(() => countrySearch);
   }, [countrySearch]);
 
+  // searched country data
   const [searchedcountryData, setsearchedcountryData] = useState([]);
 
+  // fetching searched country data
   useEffect(() => {
     axios
       .get(
@@ -92,6 +107,7 @@ export const HomePage = () => {
       });
   }, [searched]);
 
+  // pie chart data
   const piedata = {
     labels: ["deaths", "recovered", "cases"],
     datasets: [
@@ -109,9 +125,11 @@ export const HomePage = () => {
     ],
   };
 
+  // starting date and end date for graph
   const [startDate, setstartDate] = useState("2022-01-01T00:00:00Z");
   const [endDate, setendDate] = useState("2022-06-16T00:00:00Z");
 
+  // handling changes in startin data or end date
   const handleChangeDate = (prop, value) => {
     if (prop == "start") {
       setstartDate(() => value + "T00:00:00Z");
@@ -120,9 +138,11 @@ export const HomePage = () => {
     }
   };
 
+  // graph data props
   const [chartcases, setchartcases] = useState([]);
   const [chartdate, setchartdate] = useState([]);
 
+  // fetching data of graph as per starting date and end date
   useEffect(() => {
     axios
       .get(
@@ -153,6 +173,7 @@ export const HomePage = () => {
       });
   }, [searched, startDate, endDate]);
 
+  // graph data
   const data = {
     labels: chartdate,
     datasets: [
@@ -171,12 +192,19 @@ export const HomePage = () => {
     ],
   };
 
+  console.clear();
+
+  // return div to render
   return (
     <div>
+      {/* navbar */}
       <Navbar />
+      {/* main display div */}
       <div id="display-main-div">
+        {/* main world wide div */}
         <div id="world-covid-data-div">
           <h1>World Wide Report</h1>
+          {/* active and critical cases main div */}
           <div id="world-wide-active-critical-div">
             <div key={912}>
               <h2>Active Case</h2>
@@ -189,6 +217,7 @@ export const HomePage = () => {
             </div>
           </div>
           <div>
+            {/* today report div */}
             <h2>Today's covid report</h2>
             <div id="world-wide-total-report-div">
               <div key={914}>
@@ -208,6 +237,7 @@ export const HomePage = () => {
             </div>
           </div>
           <div>
+            {/* total cases report div */}
             <h2>Total covid report</h2>
             <div id="world-wide-total-report-div">
               <div key={917}>
@@ -226,6 +256,7 @@ export const HomePage = () => {
               </div>
             </div>
           </div>
+          {/* continents table main div */}
           <div className="continent-countries-table-div">
             <h2>Continents today's covid report</h2>
             <table className="contient-countries-table">
@@ -254,6 +285,7 @@ export const HomePage = () => {
               </tbody>
             </table>
           </div>
+          {/* countries table main div */}
           <div className="continent-countries-table-div">
             <h2>Countries total covid report</h2>
             <table className="contient-countries-table">
@@ -280,7 +312,9 @@ export const HomePage = () => {
             </table>
           </div>
         </div>
+        {/* main searched country div */}
         <div id="searched-country-data-div">
+          {/* country detail div (name, population and continent) */}
           <div id="country-flag-name-detail-div">
             <div>
               <h1 key={987653}>{searchedcountryData.country}</h1>
@@ -294,6 +328,7 @@ export const HomePage = () => {
               </p>
             </div>
           </div>
+          {/* country today datat and total data box */}
           <div id="country-total-today-cases-div">
             <div>
               <h2>Country today's cases</h2>
@@ -334,6 +369,7 @@ export const HomePage = () => {
               </div>
             </div>
           </div>
+          {/* country active and critical cases div */}
           <div id="country-active-critical-div">
             <div key={searchedcountryData.active}>
               <h2>Active Case</h2>
@@ -345,6 +381,7 @@ export const HomePage = () => {
               <p>{searchedcountryData.critical}</p>
             </div>
           </div>
+          {/* Pie chart div */}
           <div id="pie-chart-status">
             <h2>Report per million</h2>
             <div className="chart-pie-div">
@@ -356,6 +393,7 @@ export const HomePage = () => {
               />
             </div>
           </div>
+          {/* graph div */}
           <div id="graph-representation">
             <h2>
               Graphical representation (from {startDate.split("T")[0]} to{" "}

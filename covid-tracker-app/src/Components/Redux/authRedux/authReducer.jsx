@@ -1,3 +1,4 @@
+// importion action type for auth
 import {
   LOG_IN_FAILURE,
   LOG_IN_LOADING,
@@ -9,6 +10,7 @@ import {
   LOG_OUT_SUCCESS,
 } from "./atuhAction";
 
+// initial store
 const initialStore = {
   isLoading: false,
   token: "",
@@ -16,6 +18,7 @@ const initialStore = {
   isFailure: false,
 };
 
+// main AuthReducer function and exporting it
 export const AuthReducer = (state = initialStore, { type, payload }) => {
   switch (type) {
     case LOG_IN_LOADING:
