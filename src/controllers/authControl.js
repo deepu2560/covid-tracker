@@ -1,13 +1,20 @@
+// importing requred liberaries
 require("dotenv").config();
 
 const jwt = require("jsonwebtoken");
 
+// requiring user model for getting data or posting data
 const User = require("../models/userModels");
+
+// newToken function to make jwt token of user
+// I hided JWT key for my project
+// If you are here to try application you can add you own jwt key for local server
 
 const newToken = (user) => {
   return jwt.sign({ user }, `${process.env.JWT__KEY}`);
 };
 
+// register function add user detail in database and user can use username and password for further purpose.
 const register = async (req, res) => {
   try {
     let user = await User.findOne({ username: req.body.username })
@@ -29,6 +36,7 @@ const register = async (req, res) => {
   }
 };
 
+// login function for user login. User have to use only username and password for login.
 const login = async (req, res) => {
   try {
     const user = await User.findOne({ username: req.body.username });
@@ -56,4 +64,5 @@ const login = async (req, res) => {
   }
 };
 
+// exporting register and login function
 module.exports = { register, login };
