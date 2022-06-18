@@ -36,6 +36,13 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 export const HomePage = () => {
+  document.body.style.background = "none";
+  document.body.style.background =
+    "url('https://images.unsplash.com/photo-1583423230902-b653abc541eb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80')";
+  document.body.style.backgroundSize = "cover";
+  document.body.style.backgroundRepeat = "no-repeat";
+  document.body.style.backgroundPosition = "center";
+
   const dispatch = useDispatch();
 
   const { countrySearch } = useSelector((state) => state.event);
